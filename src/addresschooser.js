@@ -47,10 +47,11 @@ Maptimize.AddressChooser.AddressKeys  = ['street', 'city', 'state', 'country', '
  * It creates a Map object depending on mapping system on *map* DOM element. When map is ready *onInitialized* id called. In this callback map
  * can be customized.
  *  
- * There are also 2 events fired by this object:
+ * There are also 3 events fired by this object:
  *
  *  **suggests:started**: When a request is send to mapping system to get placemarks suggests from current address.
  *  **suggests:found**: When a response is received by mapping system.
+ *  **marker:dragged**: When the marker is released after dragging
  *  
  *  Default options are (required fields are in bold):
  *  <table class='options'>
@@ -355,8 +356,11 @@ Maptimize.AddressChooser.Widget.prototype = (function() {
   function _markerDragEnd(lat, lng) {
     this.lat.value = lat;
     this.lng.value = lng;
-  }
     
+    // Fires addresschooser:marker:dragged
+    this.mapProxy.trigger(this.element, 'addresschooser:marker:dragged');
+  }
+
   /** section: base
    *  Maptimize.AddressChooser.Widget#getCity(placemark) -> String
    *  - placemark (Object): Placemark object depending on mapping system.
