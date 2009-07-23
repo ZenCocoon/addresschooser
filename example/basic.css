@@ -133,7 +133,7 @@ a {
 }
 
 .spinner {
-  background: url(spinner.gif) no-repeat right 4px;
+  background: url(spinner.gif) no-repeat 24em 4px;
 }
 
 #big_spinner {

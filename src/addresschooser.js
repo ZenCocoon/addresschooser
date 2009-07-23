@@ -328,14 +328,15 @@ Maptimize.AddressChooser.Widget.prototype = (function() {
   
   // Internal: Callback when placemarks are found
   function _placemarksReceived(placemarks) {
-    this.placemarks = placemarks.sort(function(a, b) {
-      var A = a.address.toLowerCase();
-      var B = b.address.toLowerCase();
-      if (A < B) return -1;
-      if (A > B) return 1;
-      return 0;
-    });
+    this.placemarks = placemarks;
     if (this.placemarks) {
+      this.placemarks = this.placemarks.sort(function(a, b) {
+        var A = a.address.toLowerCase();
+        var B = b.address.toLowerCase();
+        if (A < B) return -1;
+        if (A > B) return 1;
+        return 0;
+      });
       this.showPlacemark(0);      
     }
     else {
