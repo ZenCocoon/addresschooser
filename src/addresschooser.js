@@ -328,8 +328,14 @@ Maptimize.AddressChooser.Widget.prototype = (function() {
   
   // Internal: Callback when placemarks are found
   function _placemarksReceived(placemarks) {
-    this.placemarks = placemarks;
-    if (placemarks) {
+    this.placemarks = placemarks.sort(function(a, b) {
+      var A = a.address.toLowerCase();
+      var B = b.address.toLowerCase();
+      if (A < B) return -1;
+      if (A > B) return 1;
+      return 0;
+    });
+    if (this.placemarks) {
       this.showPlacemark(0);      
     }
     else {
@@ -341,7 +347,7 @@ Maptimize.AddressChooser.Widget.prototype = (function() {
     if (this.spinner) this.spinner.style.display = 'none';
     
     // Fires addresschooser:suggests:found
-    this.mapProxy.trigger(this.element, 'addresschooser:suggests:found', placemarks);
+    this.mapProxy.trigger(this.element, 'addresschooser:suggests:found', this.placemarks);
   }
   
   // Internal: Delegates method to map proxy
