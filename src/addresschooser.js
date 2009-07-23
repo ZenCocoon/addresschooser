@@ -31,6 +31,7 @@ Maptimize.AddressChooser.DefaultOptions = { map:             'map',
                                          auto:             true,
                                          delay:            300,
                                          showAddressOnMap: true,
+                                         sortPlacemarks:   false,
                                          markerDraggable:  true,
                                          mapProxy:         Maptimize.Proxy.GoogleMap,
                                          onInitialized:    function() {} };
@@ -124,6 +125,11 @@ Maptimize.AddressChooser.AddressKeys  = ['street', 'city', 'state', 'country', '
  *      <td>showAddressOnMap</td>
  *      <td>true</td>
  *      <td>Display current selected address in info window</td>
+ *    </tr>
+ *    <tr>
+ *      <td>showPlacemarks</td>
+ *      <td>false</td>
+ *      <td>Sort placemarks by alphabetical order</td>
  *    </tr>
  *    <tr>
  *      <td>markerDraggable</td>
@@ -330,13 +336,15 @@ Maptimize.AddressChooser.Widget.prototype = (function() {
   function _placemarksReceived(placemarks) {
     this.placemarks = placemarks;
     if (this.placemarks) {
-      this.placemarks = this.placemarks.sort(function(a, b) {
-        var A = a.address.toLowerCase();
-        var B = b.address.toLowerCase();
-        if (A < B) return -1;
-        if (A > B) return 1;
-        return 0;
-      });
+      if (this.options.sortPlacemarks === true) {
+        this.placemarks = this.placemarks.sort(function(a, b) {
+          var A = a.address.toLowerCase();
+          var B = b.address.toLowerCase();
+          if (A < B) return -1;
+          if (A > B) return 1;
+          return 0;
+        });
+      }
       this.showPlacemark(0);      
     }
     else {
