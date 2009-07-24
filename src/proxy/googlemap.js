@@ -273,7 +273,7 @@ Maptimize.Proxy.GoogleMap.prototype = (function() {
   }
   
   /** 
-   *  Maptimize.Proxy.GoogleMap#centerOnClientLocation([zoom]) -> undefined
+   *  Maptimize.Proxy.GoogleMap#centerOnClientLocation([zoom]) -> Boolean
    *  - zoom (Integer): map zoom, default 8
    *  
    *  Center map on user location (based on its IP) if available
