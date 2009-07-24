@@ -227,7 +227,7 @@ Maptimize.Proxy.GoogleMap.prototype = (function() {
    *  - lng (Float): marker's longitude.
    *  - zoom (Integer): map zoom.
    *  - address (String): address to display inside info window.
-   *  - callback (Function): callback called when marker has benn drgged. Callback will received lat and lng as arguments.
+   *  - callback (Function): callback called when marker has been dragged. Callback will received lat and lng as arguments.
    *  - context (Object): calling context for callback.
    *  
    *  Displays placemark on the map and centers map on marker location.
