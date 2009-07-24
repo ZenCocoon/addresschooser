@@ -29,6 +29,7 @@ Maptimize.AddressChooser.DefaultOptions = { map:             'map',
                                          spinner:          false,
                                          icon:             null,
                                          auto:             true,
+                                         defaultMarker:    null,
                                          delay:            300,
                                          showAddressOnMap: true,
                                          sortPlacemarks:   false,
@@ -115,6 +116,11 @@ Maptimize.AddressChooser.AddressKeys  = ['street', 'city', 'state', 'country', '
  *      <td>auto</td>
  *      <td>true</td>
  *      <td>Update map while typing</td>
+ *    </tr>
+ *    <tr>
+ *      <td>defaultMarker</td>
+ *      <td>null</td>
+ *      <td>Object that defines the default marker used when no placemark can be found with the requested address. {lat: VALUE, lng: VALUE, zoom: VALUE, message: VALUE}</td>
  *    </tr>
  *    <tr>
  *      <td>delay</td>
@@ -348,10 +354,16 @@ Maptimize.AddressChooser.Widget.prototype = (function() {
       this.showPlacemark(0);      
     }
     else {
-      this.lat.value = '';
-      this.lng.value = '';
-      
-      this.mapProxy.hidePlacemark();
+      if (this.getCurrentAddress() != "" && this.options.defaultMarker)
+        this.mapProxy.showMarker(this.options.defaultMarker.lat, this.options.defaultMarker.lng,
+                                 this.options.defaultMarker.zoom, this.options.defaultMarker.message,
+                                 _markerDragEnd, this);
+      else {
+        this.lat.value = '';
+        this.lng.value = '';
+        
+        this.mapProxy.hidePlacemark();
+      }
     }
     if (this.spinner) this.spinner.style.display = 'none';
     
