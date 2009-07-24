@@ -282,7 +282,9 @@ Maptimize.Proxy.GoogleMap.prototype = (function() {
     var clientLocation = google && google.loader ? google.loader.ClientLocation : null;
     if (clientLocation) {
       this.map.setCenter(new GLatLng(clientLocation.latitude, clientLocation.longitude), zoom || 8);
+      return(true);
     }
+    return(false);
   }
   
   // Intern callback when geocoding has been done (should have placemarks)
