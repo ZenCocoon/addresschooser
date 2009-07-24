@@ -96,7 +96,9 @@
     });
     // END AUTOCOMPLETE SETTINGS AND HACKS :)
     
-    widget = new Maptimize.AddressChooser.Widget({onInitialized: onInitialized});
+    var defaultMarker = {lat: 37.0625, lng: -95.67706, zoom: 4,
+                         message: "We couldn't geocode you address.<br />Please adjust it manually."}
+    widget = new Maptimize.AddressChooser.Widget({onInitialized: onInitialized, defaultMarker: defaultMarker});
 
     // If you want to customized your map, add code in onInitialized callback
     function onInitialized(widget) {
